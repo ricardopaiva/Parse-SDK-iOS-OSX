@@ -9,7 +9,7 @@
 
 #import "PFFacebookPrivateUtilities.h"
 
-#import <FBSDKCoreKit/FBSDKSettings.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation PFFacebookPrivateUtilities
 
@@ -51,13 +51,8 @@
     }
 
     NSDate *expirationDate = [[NSDateFormatter pffb_preciseDateFormatter] dateFromString:expirationDateString];
-    FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString:accessToken
-                                                                permissions:nil
-                                                        declinedPermissions:nil
-                                                                      appID:[FBSDKSettings appID]
-                                                                     userID:authData[@"id"]
-                                                             expirationDate:expirationDate
-                                                                refreshDate:nil];
+    FBSDKAccessToken *token = [[FBSDKAccessToken alloc] initWithTokenString: accessToken permissions:@[] declinedPermissions:@[] expiredPermissions:@[] appID: [FBSDKSettings appID] userID: authData[@"id"] expirationDate: expirationDate refreshDate: nil dataAccessExpirationDate: nil];
+    
     return token;
 }
 
